@@ -124,14 +124,18 @@ alph[']']='''░▀█
 ░░█
 ░▀▀'''
 
-def cliptify(text): #Sends text to the clipboard
+
+#Sends text to the clipboard
+def cliptify(text): 
 	r = Tk()
 	r.withdraw()
 	r.clipboard_clear()
 	r.clipboard_append(text)
 	r.destroy()
 
-def textMake(text): #Creates a 3 line string of ascii text
+
+#Creates a 3-row string of ascii text
+def textMake(text): 
 	output=''
 	lines = ['','','']
 	for letter in text:
