@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 #FONTDLR
-#Sends ascii blown up ascii text to the user's clipboard.
+#Sends blown up ascii text to the user's clipboard.
 
 from Tkinter import Tk
-import time
-
+import time, sys
 
 alph = {}
+charCounter = 0
 
 alph['a'] = '''░█▀█
 ░█▀█
@@ -133,24 +133,38 @@ def cliptify(text):
 	r.clipboard_append(text)
 	r.destroy()
 
+#Slowly write stuff to console (Windows only)
+def slowPrint(text,delay=20):
+	delay/=float(1000)
+	for c in text:
+		sys.stdout.write(c)
+		time.sleep(delay)
+	sys.stdout.write("\n")
+
 
 #Creates a 3-row string of ascii text
-def textMake(text): 
+def textMake(text,font): 
 	output=''
 	lines = ['','','']
+	global charCounter
 	for letter in text:
 		n=0
-		for bixel in alph[letter]:
+		for bixel in font[letter]: #For each char in letter object
 			if bixel == "\n":
 				n+=1
 				continue
 			lines[n] += bixel
+			charCounter+=1
 	for line in lines:
 		output+=line+"\n"
 	return output
 
 
-userText =raw_input("Enter text: ")
-userText = userText.lower()
-text = textMake(userText)
-cliptify(text)
+slowPrint("FONTDLR version 1.0\n\n\n")
+userText =raw_input("Enter text: ").lower()
+output = textMake(userText,alph)
+cliptify(output)
+slowPrint("\nCopied "+str(charCounter)+" characters to clipboard.")
+
+time.sleep(1)
+	
