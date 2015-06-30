@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#ASCII STEAMER
+#FONTDLR
 #Sends ascii blown up ascii text to the user's clipboard.
 
 from Tkinter import Tk
